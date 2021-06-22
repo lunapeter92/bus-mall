@@ -16,6 +16,9 @@ let leftImg;
 let middleImg;
 let rightImg;
 
+const imgNameArray = [];
+const imgVoteArray = [];
+
 
 //--------------------Constructor------------------------//
 const Image = function(name, image){
@@ -72,6 +75,51 @@ function chooseImage(){
 
 }
 
+function createChart(){
+    //imageNameArray
+    //imageVoteArray
+
+    for(let img of Image.imageArray){
+        imgNameArray.push(img.name);
+        imgVoteArray.push(img.votes);
+    }
+
+    var ctx = document.getElementById('resultsChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: imgNameArray,
+            datasets: [{
+                label: '# of Votes',
+                data: imgVoteArray,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
 
 function showResults(){
     for(let img of Image.imageArray){
@@ -108,6 +156,7 @@ function handleClick(e){
     if(voteCounter === 5){
         imageSectionElem.removeEventListener('click', handleClick);
         showResults();
+        createChart();
     }
 
 }
