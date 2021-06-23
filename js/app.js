@@ -188,7 +188,7 @@ function handleClick(e){
         alert('Please choose an image');
     }
 
-    if(voteCounter === 5){
+    if(voteCounter === 25){
         imageSectionElem.removeEventListener('click', handleClick);
         // saveResults();
         showResults();
