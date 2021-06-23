@@ -43,7 +43,12 @@ Image.prototype.renderImages = function(imgPos, h2Pos){
     this.timeImageShown++;
 }
 
+// Image.prototype.reinstatiateImages = function(name, image, votes, timeImageShown){
+//     let newImage = new Image(name, image);
+//     newImage.votes = votes;
+//     newImage.timeImageShown = timeImageShown;
 
+// }
 
 
 //--------------------Global Functions-----------------------//
@@ -74,6 +79,8 @@ function chooseImage(){
     leftImg.renderImages(leftImageElem, leftImageh2Elem);
 
 }
+
+
 
 function createChart(){
     //imageNameArray
@@ -131,6 +138,33 @@ function showResults(){
 
 }
 
+function saveResults(){
+    let results = Image.imageArray;
+    let stringifyResults = JSON.stringify(results);
+
+    localStorage.setItem('results', stringifyResults);
+}
+
+function getResults(){
+    let getResults = localStorage.getItem('results');
+    if(getResults){
+        let parsedResults = JSON.parse(getResults);
+
+        for(let result of parsedResults){
+            let votes = result.votes;
+            let timeImageShown = result.timeImageShown;
+            let name = result.name;
+            let image = result.image;
+            // Image.prototype.reinstatiateImages(name, image, votes, timeImageShown);
+            for(let img of Image.imageArray){
+                if(img.name === name){
+                    img.votes = votes;
+                    img.timeImageShown = timeImageShown;
+                }
+            }
+        }
+    }
+}
 
 function handleClick(e){
     let target = e.target.id;
@@ -149,12 +183,14 @@ function handleClick(e){
             rightImg.votes++
         }
         chooseImage();
+        saveResults();
     }else{
         alert('Please choose an image');
     }
 
     if(voteCounter === 5){
         imageSectionElem.removeEventListener('click', handleClick);
+        // saveResults();
         showResults();
         createChart();
     }
@@ -191,3 +227,4 @@ new Image('Wine Glass', './img/wine-glass.jpg');
 
 
 chooseImage();
+getResults();
