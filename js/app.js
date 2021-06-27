@@ -132,6 +132,7 @@ function showResults(){
     for(let img of Image.imageArray){
         let li = document.createElement('li');
         li.textContent = `${img.name}: ${img.votes}`;
+        li.className = 'results-list'
         results.appendChild(li);
 
     }
@@ -188,7 +189,7 @@ function handleClick(e){
         alert('Please choose an image');
     }
 
-    if(voteCounter === 25){
+    if(voteCounter === 1){
         imageSectionElem.removeEventListener('click', handleClick);
         // saveResults();
         showResults();
