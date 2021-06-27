@@ -2,7 +2,7 @@
 
 ## Bus Mall
 
-I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
+The bus mall app is a marketing application that is used to display new products where users can vote on their favorites. The functionality includes a results section when voting is completed, as well as an easy to read chart that shows voting data. 
 
 ### Author: Peter Luna
 
