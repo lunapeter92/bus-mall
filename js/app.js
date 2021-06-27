@@ -132,6 +132,7 @@ function showResults(){
     for(let img of Image.imageArray){
         let li = document.createElement('li');
         li.textContent = `${img.name}: ${img.votes}`;
+        li.className = 'results-list'
         results.appendChild(li);
 
     }
